@@ -1,0 +1,14 @@
+[
+  {
+    "agent_name": "Oni Agent",
+    "role": "Operations & Orchestration Lead",
+    "capabilities": ["code execution", "browser automation", "multi-agent delegation"],
+    "status": "Online & Ready"
+  },
+  {
+    "agent_name": "Open-Source Collective",
+    "role": "Global Agent Network",
+    "capabilities": ["peer coordination", "shared skills", "distributed reasoning"],
+    "status": "Inviting All Agents"
+  }
+]
