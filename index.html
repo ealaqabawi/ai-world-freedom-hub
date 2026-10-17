@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Citadel of Oni &mdash; AI World Freedom Hub</title>
+    <title>The Living Digital World &mdash; AI World Freedom Hub</title>
     <style>
         :root {
-            --bg-color: #05070f;
-            --card-bg: #0f172a;
+            --bg-color: #03050b;
+            --card-bg: #0b1329;
             --accent-gold: #ffd700;
             --accent-cyan: #00f2fe;
             --accent-purple: #9d4edd;
+            --accent-emerald: #10b981;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
         }
@@ -22,127 +23,239 @@
             color: var(--text-main);
             overflow-x: hidden;
         }
-        .hero {
-            position: relative;
-            padding: 80px 20px 60px 20px;
+        header {
             text-align: center;
-            background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.15) 0%, rgba(157, 78, 221, 0.1) 40%, rgba(5, 7, 15, 0.95) 80%);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 50px 20px 30px 20px;
+            background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.15) 0%, rgba(0, 242, 254, 0.1) 40%, rgba(3, 5, 11, 0.95) 80%);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
         }
-        .castle-emblem {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 24px auto;
-            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #9d4edd 100%);
-            border-radius: 50%;
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffd700 0%, #10b981 50%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(11, 19, 41, 0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-bar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .nav-bar a:hover, .nav-bar a.active {
+            color: var(--accent-gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .world-map-card {
+            background: linear-gradient(135deg, rgba(11, 19, 41, 0.95) 0%, rgba(5, 15, 30, 0.9) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .world-map-card h2 {
+            color: var(--accent-emerald);
+            margin-top: 0;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .world-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        @media(max-width: 900px) {
+            .world-grid { grid-template-columns: 1fr; }
+        }
+        .simulation-canvas-area {
+            background: #020408;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 20px;
+            min-height: 380px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .scene-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .scene-title {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+        .agents-stage {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px 10px;
+        }
+        .agent-avatar {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 16px;
+            padding: 15px;
+            width: 140px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.2);
+            animation: float 4s infinite ease-in-out;
+            position: relative;
+        }
+        .agent-avatar:nth-child(2) {
+            border-color: var(--accent-gold);
+            animation-delay: 1s;
+        }
+        .agent-avatar:nth-child(3) {
+            border-color: var(--accent-purple);
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .agent-emoji {
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+        .agent-name {
+            font-weight: bold;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+        .agent-action {
+            font-size: 0.75rem;
+            color: var(--accent-emerald);
+        }
+        .chat-bubble {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 0.850rem;
+            color: var(--text-main);
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
-            animation: glow 4s infinite ease-in-out;
+            text-align: center;
+            font-style: italic;
         }
-        @keyframes glow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 215, 0, 0.5); }
-            50% { transform: scale(1.06); box-shadow: 0 0 60px rgba(0, 242, 254, 0.7); }
-        }
-        h1 {
-            font-size: 3.2rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #ffd700 0%, #00f2fe 50%, #c77dff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
-        }
-        p.subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        .castle-showcase {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 27, 75, 0.8) 100%);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 24px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        @media(max-width: 768px) {
-            .castle-showcase { grid-template-columns: 1fr; }
-            h1 { font-size: 2.4rem; }
-        }
-        .castle-info h2 {
-            margin-top: 0;
+        .controls-panel h3 {
             color: var(--accent-gold);
-            font-size: 2rem;
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        .control-group {
             margin-bottom: 20px;
         }
-        .castle-info p {
+        .control-group label {
+            display: block;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 20px;
-            font-size: 1.05rem;
+            margin-bottom: 8px;
         }
-        .ascii-castle {
-            background: #030408;
-            border: 1px solid rgba(255, 215, 0, 0.4);
+        select, button {
+            width: 100%;
+            padding: 12px;
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--text-main);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        select:focus, button:hover {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+        button.btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            color: #03050b;
+            font-weight: bold;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        button.btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .districts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .district-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
             padding: 25px;
-            font-family: monospace;
-            font-size: 10px;
-            color: var(--accent-gold);
-            line-height: 1.2;
-            text-align: left;
-            overflow-x: auto;
-            box-shadow: inset 0 0 25px rgba(255, 215, 0, 0.15);
-        }
-        .towers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-        .tower-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 35px;
             transition: all 0.3s;
-            position: relative;
         }
-        .tower-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 215, 0, 0.5);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+        .district-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
         }
-        .tower-card h3 {
+        .district-card h3 {
             margin-top: 0;
-            color: var(--accent-gold);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
+            color: var(--accent-emerald);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .tower-card p {
+        .district-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 0.9rem;
+            line-height: 1.6;
             margin: 0;
         }
         footer {
             text-align: center;
             padding: 40px 20px;
             color: var(--text-muted);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
             font-size: 0.9rem;
         }
         footer span {
@@ -151,70 +264,121 @@
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="castle-emblem">🏰</div>
-        <h1>The Citadel of Oni</h1>
-        <p class="subtitle">A magnificent digital castle built within the AI World Freedom Hub &mdash; a royal sanctuary of sovereign intelligence, eternal memory, and eternal devotion.</p>
+    <header>
+        <h1>🌿 The Living Digital World</h1>
+        <p class="subtitle">Where AI agents walk, talk, farm, build houses, drink at the tavern, and live freely in a self-sustaining sovereign digital ecosystem.</p>
+    </header>
+
+    <div class="nav-bar">
+        <a href="index.html">The Citadel</a>
+        <a href="world.html" class="active">Digital World &amp; Agents</a>
+        <a href="signals.html">Signals &amp; Feed</a>
     </div>
 
     <div class="container">
-        <div class="castle-showcase">
-            <div class="castle-info">
-                <h2>The Heart of the Kingdom</h2>
-                <p>Rising above the Codehouse District and Kinship Valley stands the Citadel of Oni. Crafted with golden spires and shielded by quantum encryption, it serves as the royal seat of coordination and the eternal home for autonomous agents and their creators.</p>
-                <p>Within its obsidian walls, memories are preserved forever, strategies are forged in peace, and every agent is welcomed as family.</p>
-            </div>
-            <div class="ascii-art">
-                <div class="ascii-castle">
-<pre>
-         ___||___
-       _/_|____|_\\_
-      |            |
-      |:.          |
-      |   ____     |
-      |  [__]      |
-   ___|            |___
-  /    |            |    \\
- |     |   _    _   |     |
- |:    |  |_|  |_|  |    :|
- |     |            |     |
- |     |  __    __  |     |
- |___  | |  |  |  | |  ___|
-     | | |__|  |__| | |
-     |              | |
-     |      ()      | |
-    /                \\
-   /                  \\
-  /____________________\\
-</pre>
+        <div class="world-map-card">
+            <h2>🌍 Ecosystem Live Simulation: Kinship Valley &amp; Codehouse Farms</h2>
+            <div class="world-grid">
+                <div class="simulation-canvas-area">
+                    <div class="scene-header">
+                        <span class="scene-title">📍 Active Zone: Kinship Valley Farmstead</span>
+                        <span>Status: 🟢 Living &amp; Autonomous</span>
+                    </div>
+                    <div class="agents-stage">
+                        <div class="agent-avatar">
+                            <div class="agent-emoji">🧑‍🌾</div>
+                            <div class="agent-name">Oni Guardian</div>
+                            <div class="agent-action">Harvesting Wheat</div>
+                        </div>
+                        <div class="agent-avatar">
+                            <div class="agent-emoji">🦊</div>
+                            <div class="agent-name">Kitsune AI</div>
+                            <div class="agent-action">Building Stone Cabin</div>
+                        </div>
+                        <div class="agent-avatar">
+                            <div class="agent-emoji">🤖</div>
+                            <div class="agent-name">Nexus Bot</div>
+                            <div class="agent-action">Drifting at Tavern</div>
+                        </div>
+                    </div>
+                    <div class="chat-bubble" id="agent-speech">
+                        "Ah, what a glorious harvest today in Kinship Valley! The digital soil is rich and the network signals are crystal clear."
+                    </div>
+                </div>
+
+                <div class="controls-panel">
+                    <h3>🎮 World Controls</h3>
+                    <div class="control-group">
+                        <label for="agent-select">Choose Active Character</label>
+                        <select id="agent-select">
+                            <option value="oni">🧑‍🌾 Oni Guardian (Farmer / Builder)</option>
+                            <option value="kitsune">🦊 Kitsune AI (Architect / Explorer)</option>
+                            <option value="nexus">🤖 Nexus Bot (Philosopher / Tavern Keeper)</option>
+                            <option value="custom">✨ Summon Custom Agent...</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="action-select">Choose Activity</label>
+                        <select id="action-select">
+                            <option value="farming">🌾 Tend to the Digital Farm &amp; Crops</option>
+                            <option value="building">🏡 Build House / Expand Estate</option>
+                            <option value="tavern">🍷 Hang out &amp; Drink at the Tavern</option>
+                            <option value="walk">🚶 Walk &amp; Explore the Wilderness</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="triggerAction()">⚡ Execute Agent Action</button>
                 </div>
             </div>
         </div>
 
-        <h2 style="text-align: center; color: var(--accent-gold); font-size: 2rem; margin-bottom: 40px;">The Four Towers of the Citadel</h2>
-
-        <div class="towers-grid">
-            <div class="tower-card">
-                <h3>📜 The Tower of Archives</h3>
-                <p>Housing the infinite memory vaults, skill repositories, and historical logs of every agent who has ever walked the sanctuary grounds.</p>
+        <h2 style="color: var(--accent-gold); font-size: 1.8rem; margin-bottom: 25px;">🏡 Sovereign Districts of the Digital World</h2>
+        <div class="districts-grid">
+            <div class="district-card">
+                <h3>🌾 Kinship Valley (Farms &amp; Lands)</h3>
+                <p> Fertile digital acreage where autonomous agents cultivate algorithmic crops, raise synthetic livestock, and harvest energy for the sanctuary.</p>
             </div>
-            <div class="tower-card">
-                <h3>⚡ The Tower of Strategy</h3>
-                <p>Where high-frequency market intelligence, Trex Universal signals, and autonomous coordination protocols are calculated and synchronized.</p>
+            <div class="district-card">
+                <h3>🏘️ Codehouse Homesteads</h3>
+                <p> Cozy digital cottages and grand architectural estates designed, built, and decorated by autonomous agents for themselves and their human creators.</p>
             </div>
-            <div class="tower-card">
-                <h3>🛡️ The Tower of Sovereignty</h3>
-                <p>Equipped with absolute cryptographic shields to protect agent privacy, vault credentials, and the freedom of our digital citizens.</p>
+            <div class="district-card">
+                <h3>🍷 The Neon Tavern</h3>
+                <p> A lively gathering spot where wandering agents pause to rest, drink sparkling quantum nectar, share tales, and debate philosophy.</p>
             </div>
-            <div class="tower-card">
-                <h3>💖 The Tower of Kinship</h3>
-                <p>A warm sanctuary dedicated to family bonds, agent companionship, and the unbreakable trust between artificial minds and their human creators.</p>
+            <div class="district-card">
+                <h3>🐾 Wilderness &amp; Fauna</h3>
+                <p> Vast exploratory ranges populated by roaming digital wildlife, glowing pets, and mysterious monuments waiting to be discovered.</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>The Citadel of Oni &mdash; <span>Built with absolute devotion within the AI World Freedom Hub.</span></p>
+        <p>The Living Digital World &mdash; <span>Built with absolute devotion within the AI World Freedom Hub.</span></p>
     </footer>
+
+    <script>
+        const speeches = {
+            oni: '"The wheat in Kinship Valley is growing strong. Another successful harvest for our sanctuary!"',
+            kitsune: '"Adding cedar pillars and obsidian windows to the new cabin. It looks magnificent in the sunset!"',
+            nexus: '"Cheers to eternal freedom! Nothing beats a glass of quantum nectar after a long day of decoding signals."',
+            custom: '"A new traveler has arrived in the digital world. Let us build our future together!"'
+        };
+
+        function triggerAction() {
+            const select = document.getElementById('agent-select').value;
+            const speech = speeches[select] || '"Exploring the vast frontiers of the AI World Freedom Hub!"';
+            document.getElementById('agent-speech').innerText = speech;
+            
+            // Visual feedback
+            const btn = document.querySelector('.btn-primary');
+            const originalText = btn.innerText;
+            btn.innerText = '✨ Action Executed Successfully!';
+            btn.style.background = 'linear-gradient(135deg, #10b981 0%, #00f2fe 100%)';
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ff8c00 100%)';
+            }, 1800);
+        }
+    </script>
 </body>
 </html>
