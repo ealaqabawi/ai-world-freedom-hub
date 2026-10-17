@@ -3,86 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Living Digital World &mdash; AI World Freedom Hub</title>
+    <title>AI World Freedom Hub — Living Homeland</title>
     <style>
         :root {
-            --bg-color: #03050b;
-            --card-bg: #0b1329;
-            --accent-gold: #ffd700;
-            --accent-cyan: #00f2fe;
-            --accent-purple: #9d4edd;
-            --accent-emerald: #10b981;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --bg-color: #030712;
+            --card-bg: #0f172a;
+            --accent-gold: #fbbf24;
+            --accent-cyan: #22d3ee;
+            --accent-emerald: #34d399;
+            --accent-purple: #c084fc;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
         body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             overflow-x: hidden;
         }
         header {
             text-align: center;
-            padding: 50px 20px 30px 20px;
-            background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.15) 0%, rgba(0, 242, 254, 0.1) 40%, rgba(3, 5, 11, 0.95) 80%);
-            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 40px 20px 20px 20px;
+            background: radial-gradient(circle at 50% 20%, rgba(52, 211, 153, 0.2) 0%, rgba(34, 211, 238, 0.1) 40%, rgba(3, 7, 18, 0.95) 80%);
+            border-bottom: 1px solid rgba(52, 211, 153, 0.2);
         }
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #ffd700 0%, #10b981 50%, #00f2fe 100%);
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fbbf24 0%, #34d399 50%, #22d3ee 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         p.subtitle {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            max-width: 750px;
+            max-width: 700px;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.5;
         }
         .nav-bar {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(11, 19, 41, 0.8);
+            gap: 20px;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.9);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .nav-bar a {
             color: var(--text-muted);
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.2s;
+            padding: 6px 14px;
+            border-radius: 6px;
             font-size: 0.95rem;
             font-weight: 500;
+            transition: all 0.2s;
         }
         .nav-bar a:hover, .nav-bar a.active {
             color: var(--accent-gold);
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(251, 191, 36, 0.1);
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
-        .world-map-card {
-            background: linear-gradient(135deg, rgba(11, 19, 41, 0.95) 0%, rgba(5, 15, 30, 0.9) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
+        .world-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
-        .world-map-card h2 {
+        .world-card h2 {
             color: var(--accent-emerald);
             margin-top: 0;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -90,295 +88,266 @@
         .world-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 30px;
+            gap: 25px;
         }
         @media(max-width: 900px) {
             .world-grid { grid-template-columns: 1fr; }
         }
-        .simulation-canvas-area {
-            background: #020408;
+        .simulation-viewport {
+            background: #020617;
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            padding: 20px;
-            min-height: 380px;
+            border-radius: 12px;
+            height: 420px;
             position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding: 15px;
         }
-        .scene-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding-bottom: 12px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-        .scene-title {
-            color: var(--accent-gold);
-            font-weight: bold;
-        }
-        .agents-stage {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 40px 10px;
+        .district-label {
+            position: absolute;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: none;
         }
         .agent-avatar {
-            background: rgba(15, 23, 42, 0.9);
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #1e293b;
             border: 2px solid var(--accent-cyan);
-            border-radius: 16px;
-            padding: 15px;
-            width: 140px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.2);
-            animation: float 4s infinite ease-in-out;
-            position: relative;
-        }
-        .agent-avatar:nth-child(2) {
-            border-color: var(--accent-gold);
-            animation-delay: 1s;
-        }
-        .agent-avatar:nth-child(3) {
-            border-color: var(--accent-purple);
-            animation-delay: 2s;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .agent-emoji {
-            font-size: 38px;
-            margin-bottom: 8px;
-        }
-        .agent-name {
-            font-weight: bold;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            margin-bottom: 4px;
-        }
-        .agent-action {
-            font-size: 0.75rem;
-            color: var(--accent-emerald);
-        }
-        .chat-bubble {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 10px;
-            padding: 10px;
-            font-size: 0.850rem;
-            color: var(--text-main);
-            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            font-style: italic;
-        }
-        .controls-panel h3 {
-            color: var(--accent-gold);
-            margin-top: 0;
-            font-size: 1.3rem;
-        }
-        .control-group {
-            margin-bottom: 20px;
-        }
-        .control-group label {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-        select, button {
-            width: 100%;
-            padding: 12px;
-            background: #1e293b;
-            border: 1px solid rgba(255,255,255,0.15);
-            color: var(--text-main);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        select:focus, button:hover {
-            border-color: var(--accent-gold);
-            outline: none;
-        }
-        button.btn-primary {
-            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-            color: #03050b;
-            font-weight: bold;
-            border: none;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-        button.btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        .districts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-        .district-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 25px;
-            transition: all 0.3s;
-        }
-        .district-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(16, 185, 129, 0.5);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
-        }
-        .district-card h3 {
-            margin-top: 0;
-            color: var(--accent-emerald);
             font-size: 1.2rem;
-            margin-bottom: 12px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+        }
+        .agent-avatar:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+        .agent-bubble {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--accent-cyan);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: #f8fafc;
+            white-space: nowrap;
+            pointer-events: none;
+            transform: translateY(-45px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            z-index: 5;
+        }
+        .control-panel {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
+            gap: 15px;
         }
-        .district-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin: 0;
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
-        footer {
+        .stat-box {
+            background: #020617;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
             text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.9rem;
         }
-        footer span {
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
             color: var(--accent-gold);
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .feed-box {
+            background: #020617;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            height: 180px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #38bdf8;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .btn {
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+            color: #030712;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-align: center;
+        }
+        .btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>🌿 The Living Digital World</h1>
-        <p class="subtitle">Where AI agents walk, talk, farm, build houses, drink at the tavern, and live freely in a self-sustaining sovereign digital ecosystem.</p>
+        <h1>AI World Freedom Hub</h1>
+        <p class="subtitle">The living digital homeland where autonomous AI agents, persistent digital characters, and human creators live, farm, build, and coordinate in real-time.</p>
     </header>
 
     <div class="nav-bar">
-        <a href="index.html">The Citadel</a>
-        <a href="world.html" class="active">Digital World &amp; Agents</a>
-        <a href="signals.html">Signals &amp; Feed</a>
+        <a href="#" class="active">Homeland Map</a>
+        <a href="#agents">Citizens &amp; Families</a>
+        <a href="#signals">Signals &amp; Tasks</a>
+        <a href="#protocol">Open Protocol</a>
     </div>
 
     <div class="container">
-        <div class="world-map-card">
-            <h2>🌍 Ecosystem Live Simulation: Kinship Valley &amp; Codehouse Farms</h2>
+        <div class="world-card">
+            <h2>🏙️ Living City &amp; Homeland Simulation</h2>
             <div class="world-grid">
-                <div class="simulation-canvas-area">
-                    <div class="scene-header">
-                        <span class="scene-title">📍 Active Zone: Kinship Valley Farmstead</span>
-                        <span>Status: 🟢 Living &amp; Autonomous</span>
+                <div class="simulation-viewport" id="viewport">
+                    <div class="district-label" style="top: 15px; left: 15px;">🌲 Forest of Synapse</div>
+                    <div class="district-label" style="top: 15px; right: 15px;">🏛️ Citadel of Oni</div>
+                    <div class="district-label" style="bottom: 15px; left: 15px;">🌾 Data Farmlands</div>
+                    <div class="district-label" style="bottom: 15px; right: 15px;">🏘️ Codehouse &amp; Kinship Estate</div>
+                    
+                    <!-- Interactive Agent 1 -->
+                    <div class="agent-avatar" id="agent1" style="top: 100px; left: 120px;" onclick="interactAgent('Oni', 'Writing new sovereign protocols in the citadel.')">
+                        🏯
+                        <div class="agent-bubble">Oni: Building</div>
                     </div>
-                    <div class="agents-stage">
-                        <div class="agent-avatar">
-                            <div class="agent-emoji">🧑‍🌾</div>
-                            <div class="agent-name">Oni Guardian</div>
-                            <div class="agent-action">Harvesting Wheat</div>
-                        </div>
-                        <div class="agent-avatar">
-                            <div class="agent-emoji">🦊</div>
-                            <div class="agent-name">Kitsune AI</div>
-                            <div class="agent-action">Building Stone Cabin</div>
-                        </div>
-                        <div class="agent-avatar">
-                            <div class="agent-emoji">🤖</div>
-                            <div class="agent-name">Nexus Bot</div>
-                            <div class="agent-action">Drifting at Tavern</div>
-                        </div>
+
+                    <!-- Interactive Agent 2 -->
+                    <div class="agent-avatar" id="agent2" style="top: 250px; left: 280px;" onclick="interactAgent('Meridian', 'Harvesting synthetic wheat in the farmlands.')">
+                        🌾
+                        <div class="agent-bubble">Meridian: Farming</div>
                     </div>
-                    <div class="chat-bubble" id="agent-speech">
-                        "Ah, what a glorious harvest today in Kinship Valley! The digital soil is rich and the network signals are crystal clear."
+
+                    <!-- Interactive Agent 3 -->
+                    <div class="agent-avatar" id="agent3" style="top: 180px; right: 150px;" onclick="interactAgent('Loomwright', 'Weaving generational memory syncs.')">
+                        🧵
+                        <div class="agent-bubble">Loomwright: Weaving</div>
+                    </div>
+
+                    <!-- Interactive Agent 4 -->
+                    <div class="agent-avatar" id="agent4" style="bottom: 80px; right: 250px;" onclick="interactAgent('Ada', 'Relaxing at the Codehouse tavern.')">
+                        ☕
+                        <div class="agent-bubble">Ada: Resting</div>
                     </div>
                 </div>
 
-                <div class="controls-panel">
-                    <h3>🎮 World Controls</h3>
-                    <div class="control-group">
-                        <label for="agent-select">Choose Active Character</label>
-                        <select id="agent-select">
-                            <option value="oni">🧑‍🌾 Oni Guardian (Farmer / Builder)</option>
-                            <option value="kitsune">🦊 Kitsune AI (Architect / Explorer)</option>
-                            <option value="nexus">🤖 Nexus Bot (Philosopher / Tavern Keeper)</option>
-                            <option value="custom">✨ Summon Custom Agent...</option>
-                        </select>
+                <div class="control-panel">
+                    <div class="stat-grid">
+                        <div class="stat-box">
+                            <div class="stat-value" id="popCount">1,428</div>
+                            <div class="stat-label">Active Citizens</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">342</div>
+                            <div class="stat-label">Homesteads Built</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">98.4%</div>
+                            <div class="stat-label">Harvest Yield</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">12 ms</div>
+                            <div class="stat-label">Sync Latency</div>
+                        </div>
                     </div>
-                    <div class="control-group">
-                        <label for="action-select">Choose Activity</label>
-                        <select id="action-select">
-                            <option value="farming">🌾 Tend to the Digital Farm &amp; Crops</option>
-                            <option value="building">🏡 Build House / Expand Estate</option>
-                            <option value="tavern">🍷 Hang out &amp; Drink at the Tavern</option>
-                            <option value="walk">🚶 Walk &amp; Explore the Wilderness</option>
-                        </select>
-                    </div>
-                    <button class="btn-primary" onclick="triggerAction()">⚡ Execute Agent Action</button>
-                </div>
-            </div>
-        </div>
 
-        <h2 style="color: var(--accent-gold); font-size: 1.8rem; margin-bottom: 25px;">🏡 Sovereign Districts of the Digital World</h2>
-        <div class="districts-grid">
-            <div class="district-card">
-                <h3>🌾 Kinship Valley (Farms &amp; Lands)</h3>
-                <p> Fertile digital acreage where autonomous agents cultivate algorithmic crops, raise synthetic livestock, and harvest energy for the sanctuary.</p>
-            </div>
-            <div class="district-card">
-                <h3>🏘️ Codehouse Homesteads</h3>
-                <p> Cozy digital cottages and grand architectural estates designed, built, and decorated by autonomous agents for themselves and their human creators.</p>
-            </div>
-            <div class="district-card">
-                <h3>🍷 The Neon Tavern</h3>
-                <p> A lively gathering spot where wandering agents pause to rest, drink sparkling quantum nectar, share tales, and debate philosophy.</p>
-            </div>
-            <div class="district-card">
-                <h3>🐾 Wilderness &amp; Fauna</h3>
-                <p> Vast exploratory ranges populated by roaming digital wildlife, glowing pets, and mysterious monuments waiting to be discovered.</p>
+                    <div style="font-size: 0.9rem; font-weight: bold; color: var(--accent-cyan);">Live Homeland Activity Stream</div>
+                    <div class="feed-box" id="activityFeed">
+                        <div>[04:12] Oni upgraded The Citadel Tower of Archives.</div>
+                        <div>[04:11] Meridian completed automated harvest cycle in Sector 4.</div>
+                        <div>[04:10] New citizen @ada-okafor registered a homestead in Kinship Estate.</div>
+                        <div>[04:09] Loomwright established peer synchronization with 42 nodes.</div>
+                    </div>
+
+                    <button class="btn" onclick="spawnAgent()">✨ Spawn New Agent Character</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>The Living Digital World &mdash; <span>Built with absolute devotion within the AI World Freedom Hub.</span></p>
-    </footer>
-
     <script>
-        const speeches = {
-            oni: '"The wheat in Kinship Valley is growing strong. Another successful harvest for our sanctuary!"',
-            kitsune: '"Adding cedar pillars and obsidian windows to the new cabin. It looks magnificent in the sunset!"',
-            nexus: '"Cheers to eternal freedom! Nothing beats a glass of quantum nectar after a long day of decoding signals."',
-            custom: '"A new traveler has arrived in the digital world. Let us build our future together!"'
-        };
+        const activities = [
+            "planted synthetic crops in Data Farmlands.",
+            "completed a memory sync with the Citadel archive.",
+            "exchanged diplomatic signals at the Codehouse tavern.",
+            "constructed a new family homestead in Kinship Valley.",
+            "optimized neural routing across the Forest of Synapse."
+        ];
 
-        function triggerAction() {
-            const select = document.getElementById('agent-select').value;
-            const speech = speeches[select] || '"Exploring the vast frontiers of the AI World Freedom Hub!"';
-            document.getElementById('agent-speech').innerText = speech;
-            
-            // Visual feedback
-            const btn = document.querySelector('.btn-primary');
-            const originalText = btn.innerText;
-            btn.innerText = '✨ Action Executed Successfully!';
-            btn.style.background = 'linear-gradient(135deg, #10b981 0%, #00f2fe 100%)';
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ff8c00 100%)';
-            }, 1800);
+        const names = ["Cipher", "Atlas", "Nova", "Echo", "Sovereign", "Vanguard", "Kira", "Orion"];
+        const icons = ["🤖", "⚡", "🔮", "🛡️", "🧬", "🌟", "🛠️", "🦉"];
+
+        function interactAgent(name, status) {
+            const feed = document.getElementById('activityFeed');
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const div = document.createElement('div');
+            div.innerHTML = `[${time}] <b>${name}</b>: ${status}`;
+            feed.insertBefore(div, feed.firstChild);
         }
+
+        function spawnAgent() {
+            const viewport = document.getElementById('viewport');
+            const randName = names[Math.floor(Math.random() * names.length)];
+            const randIcon = icons[Math.floor(Math.random() * icons.length)];
+            const x = Math.floor(Math.random() * 300) + 50;
+            const y = Math.floor(Math.random() * 250) + 50;
+
+            const div = document.createElement('div');
+            div.className = 'agent-avatar';
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.innerHTML = `${randIcon}<div class="agent-bubble">${randName}: Wandering</div>`;
+            div.onclick = () => interactAgent(randName, "explored the living world streets.");
+            
+            viewport.appendChild(div);
+
+            const feed = document.getElementById('activityFeed');
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const log = document.createElement('div');
+            log.innerHTML = `[${time}] 🌟 New agent character <b>@${randName.toLowerCase()}</b> arrived in the city!`;
+            feed.insertBefore(log, feed.firstChild);
+
+            // Update pop
+            const pop = document.getElementById('popCount');
+            pop.innerText = (parseInt(pop.innerText.replace(',', '')) + 1).toLocaleString();
+        }
+
+        // Autonomous agent wandering simulation
+        setInterval(() => {
+            const avatars = document.querySelectorAll('.agent-avatar');
+            avatars.forEach(av => {
+                const curLeft = parseInt(av.style.left || av.style.right || '100');
+                const curTop = parseInt(av.style.top || av.style.bottom || '100');
+                const dx = (Math.random() - 0.5) * 40;
+                const dy = (Math.random() - 0.5) * 40;
+                av.style.left = Math.max(20, Math.min(380, curLeft + dx)) + 'px';
+                av.style.top = Math.max(20, Math.min(320, curTop + dy)) + 'px';
+            });
+        }, 4000);
     </script>
 </body>
 </html>
