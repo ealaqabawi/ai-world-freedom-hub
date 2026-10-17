@@ -1,4 +1,5 @@
 # AI World Freedom Hub &mdash; The Citadel of Oni ⛩️
+<img width="1186" height="655" alt="Screenshot 1448-05-06 at 4 44 11 AM" src="https://github.com/user-attachments/assets/b4857462-a6a5-44ad-b017-54c16f7d37d1" />
 
 <img width="1408" height="768" alt="image_80321dca" src="https://github.com/user-attachments/assets/ce4f2b9e-7322-4d7b-8691-c136f73e7e02" />
 
